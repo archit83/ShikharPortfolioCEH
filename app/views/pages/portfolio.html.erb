@@ -1,0 +1,172 @@
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    color: #39ff14; /* Neon green */
+    font-family: "Courier New", monospace;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  /* LEFT: text area */
+  .info {
+    flex: 1.2;
+    padding: 20px 10px;
+  }
+
+  .line {
+    margin: 12px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .name {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #39ff14;
+    text-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: rgba(57, 255, 20, 0.9);
+  }
+
+  /* RIGHT: profile */
+  .profile {
+    width: 300px;
+    flex: 0 0 300px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 30px rgba(57, 255, 20, 0.25), 0 0 40px rgba(57, 255, 20, 0.12);
+    border: 2px solid rgba(57, 255, 20, 0.3);
+  }
+
+  .small-meta {
+    margin-top: 18px;
+    font-size: 14px;
+    color: rgba(57, 255, 20, 0.8);
+  }
+
+  /* blinking cursor */
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background: #39ff14;
+    animation: blink 1s infinite;
+    margin-left: 3px;
+  }
+
+  @keyframes blink {
+    0%, 50% { background: #39ff14; }
+    51%, 100% { background: transparent; }
+  }
+</style>
+
+
+<div class="container">
+  <!-- LEFT -->
+  <div class="info" id="info">
+    <div class="name">Shikhar Srivastava</div>
+    <div class="title">Cybersecurity Expert • Ethical Hacker • Bug Bounty Hunter</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="profile">
+    <img src="/profile.jpg" alt="Shikhar Srivastava" class="avatar">
+    <div class="small-meta">
+      <!-- <div><strong>Location:</strong> India</div> -->
+      <div><strong>Availability:</strong> Open for projects & collaboration</div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const lines = [
+    " ",
+    " ",
+    "Summary:",
+    "    Experienced cybersecurity professional focused on penetration testing,",
+    "    web application security, and adversary emulation.",
+    "",
+    " ",
+
+    "Qualifications:",
+    "  - Class X (2012) – Science Stream, CBSE Board",
+    "  - Class XII (2014) – Science Stream, CBSE Board",
+    "  - Bachelor of Computer Applications (BCA) – IFIM College, Electronic City",
+    "    Bangalore",
+    "  - Postgraduate Program in Cybersecurity – Massachusetts Institute of ",
+    "    Technology (MIT), Online",
+    "",
+    " ",
+    "Core Skills:",
+    "  - Penetration Testing, Network Security, Web App Security",
+    "  - Malware Analysis, Reverse Engineering",
+    "  - Python, Ruby on Rails, JavaScript",
+    "",
+    " ",
+    "Selected Projects:",
+    "  - Automated Pentest Scripts → Python suite for reconnaissance & exploitation",
+    "  - Secure Auth System → Multi-factor authentication in Rails",
+    "  - Bug Bounty Reports → Critical vulnerabilities disclosed responsibly",
+    "",
+    " ",
+    " ",
+    "Contact:",
+    "  - Email: Shikharsrivastava2911@gmail.com ",
+    "  - GitHub: github.com/saumya-hacker",
+    "  - LinkedIn: linkedin.com/in/saumya-cyber"
+  ];
+
+  let index = 0;
+  const container = document.getElementById("info");
+
+  function typeLine() {
+    if (index < lines.length) {
+      const lineDiv = document.createElement("div");
+      lineDiv.classList.add("line");
+      container.appendChild(lineDiv);
+
+      let charIndex = 0;
+      const text = lines[index];
+
+      function typeChar() {
+        if (charIndex < text.length) {
+          lineDiv.textContent += text[charIndex];
+          charIndex++;
+          setTimeout(typeChar, 5); // much faster typing
+        } else {
+          index++;
+          setTimeout(typeLine, 30); // faster line transition
+        }
+      }
+
+      typeChar();
+    } else {
+      const cursor = document.createElement("span");
+      cursor.classList.add("cursor");
+      container.appendChild(cursor);
+    }
+  }
+
+  setTimeout(typeLine, 200);
+</script>
